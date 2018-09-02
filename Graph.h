@@ -23,14 +23,13 @@ struct Edge {
   	src = nodeSrc.id;
     dest = nodeDest.id;
 
-    int xd = nodeSrc.x - nodeDest.x;
-    int yd = nodeSrc.y - nodeDest.y;
-    if(edgeDistanceMethod.compare("EUC_2D")) {  
-
-      cost = (int) std::round(std::sqrt(std::pow(xd, 2) + std::pow(xd, 2)));
-    } else if(edgeDistanceMethod.compare("ATT")) {
+    double xd = nodeSrc.x - nodeDest.x;
+    double yd = nodeSrc.y - nodeDest.y;
+    if(edgeDistanceMethod == "EUC_2D") {
+      cost = std::round(std::sqrt(std::pow(xd, 2) + std::pow(yd, 2)));
+    } else if(edgeDistanceMethod == "ATT") {
       
-      double rif = (std::sqrt((std::pow(xd, 2) + std::pow(xd, 2))/10.0));
+      double rif = (std::sqrt((std::pow(xd, 2) + std::pow(yd, 2))/10.0));
       double tif = std::round(rif);
       cost = tif < rif ? tif + 1 : tif;
     }

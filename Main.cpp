@@ -46,25 +46,20 @@ int main(int argc, char *argv[]) {
     TI::Node node;
     
     file >> node.id >> node.x >> node.y;
-    std::cout << node.id << node.x << node.y << std::endl;
     nodes.push_back(node);
   }
 
   TI::Graph graph(nodes, nodeLength, edgeDistanceMethod);
-  /*
-  for(auto entry : graph.adjMatrix) {
-    std::cout << entry.first.first << " " << entry.first.second << " " << entry.second << std::endl;
-  }
-  */
+
   std::vector<int> tour;
   tour.push_back(1);
   graph.visited[0] = true;
   int remainingNodes = nodeLength - 1;
-  double totalCost = 0;
+  double totalCost = 0.0;
   int firstNodeId = 1;
   TI::TSP tsp(graph, firstNodeId);
   tsp.nearestNeighbor(firstNodeId, tour, totalCost, remainingNodes);
-  //std::sort(tour.begin(), tour.end());
+  
   for (int id : tour) {
     std::cout << id << std::endl;
   }

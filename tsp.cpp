@@ -9,7 +9,7 @@ void TSP::nearestNeighbor(const int& srcId,
 	std::vector<int>& tour, double& totalCost, int& remainingNodes) {
 
   if (remainingNodes == 0) {
-    int cost = graph.adjMatrix.at(std::make_pair(TSP::firstNodeId, srcId));
+    double cost = graph.adjMatrix.at(std::make_pair(TSP::firstNodeId, srcId));
     totalCost += cost;
     tour.push_back(1);
 

@@ -16,6 +16,7 @@ Graph::Graph(const std::vector<Node>& nodes, const int& numNodes,
   for (int i = 0; i < numNodes - 1; ++i) {
     for (int j = i+1; j < numNodes; ++j) {
       Edge edge(nodes[i], nodes[j], edgeDistanceMethod);
+      
       addEdge(edge);
     }
   }
