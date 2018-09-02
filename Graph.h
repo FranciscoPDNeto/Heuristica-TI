@@ -2,6 +2,8 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include <map>
+#include <utility>
 
 namespace TI {
 
@@ -40,11 +42,16 @@ public:
     const std::string& edgeDistanceMethod);
 
 	~Graph() {
-		delete[] adjacentList;
-	}
-	
+		delete visited;
+	};
+
+  void addEdge(const Edge& edge);
+
+	std::map<std::pair<int, int>, int> adjMatrix;
+  int numberNodes;
+  bool *visited;
 private:
-	std::vector<int> *adjacentList;
+	
 };
 
 	

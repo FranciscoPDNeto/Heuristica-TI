@@ -47,6 +47,8 @@ int main(int argc, char *argv[]) {
     nodes.push_back(node);
   }
 
+  TI::Graph graph(nodes, nodeLength, edgeDistanceMethod);
+  std::cout << "Done!" << std::endl;
   file.close();
   return 0;
 }
