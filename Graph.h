@@ -50,7 +50,6 @@ public:
 	std::map<std::pair<int, int>, int> adjMatrix;
   int numberNodes;
   bool *visited;
-private:
 	
 };
 

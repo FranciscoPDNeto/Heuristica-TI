@@ -1,6 +1,7 @@
+#include <algorithm>
 #include <fstream>
 #include <iostream>
-#include "Graph.h"
+#include "tsp.h"
 
 int main(int argc, char *argv[]) {
 
@@ -38,6 +39,7 @@ int main(int argc, char *argv[]) {
   
   // Linha contendo o identificador que as coordenadas vão começar a serem lidas.
   getline(file, ignore);
+  getline(file, ignore);
   
   std::vector<TI::Node> nodes;
   for (int i = 0; i < nodeLength; ++i) {
@@ -48,7 +50,22 @@ int main(int argc, char *argv[]) {
   }
 
   TI::Graph graph(nodes, nodeLength, edgeDistanceMethod);
-  std::cout << "Done!" << std::endl;
+  for(auto entry : graph.adjMatrix) {
+    std::cout << entry.first.first << " " << entry.first.second << " " << entry.second << std::endl;
+  }
+  std::vector<int> tour;
+  tour.push_back(1);
+  graph.visited[0] = true;
+  int remainingNodes = nodeLength - 1;
+  int totalCost = 0;
+  int firstNodeId = 1;
+  TI::TSP tsp(graph, firstNodeId);
+  tsp.nearestNeighbor(firstNodeId, tour, totalCost, remainingNodes);
+  //std::sort(tour.begin(), tour.end());
+  for (int id : tour) {
+    std::cout << id << std::endl;
+  }
+  std::cout << "Total cost: " << totalCost << std::endl;
   file.close();
   return 0;
 }
