@@ -9,9 +9,9 @@ public:
 
   TSP(const Graph& graph, const int& firstNodeId) : graph(graph), firstNodeId(firstNodeId){
   };
-  
+
   void nearestNeighbor(const int& srcId, std::vector<int>& tour, 
-    int& totalCost, int& remainingNodes);
+    double& totalCost, int& remainingNodes);
 
   
 private:

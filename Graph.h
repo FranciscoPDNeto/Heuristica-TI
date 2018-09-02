@@ -10,12 +10,14 @@ namespace TI {
 
 
 struct Node {
-  int id, x, y;
+  int id;
+  double x, y;
 };
 
 
 struct Edge {
-  int src, dest, cost;
+  int src, dest;
+  double cost;
 
   Edge(const Node& nodeSrc, const Node& nodeDest, const std::string& edgeDistanceMethod) {
   	src = nodeSrc.id;
@@ -47,7 +49,7 @@ public:
 
   void addEdge(const Edge& edge);
 
-	std::map<std::pair<int, int>, int> adjMatrix;
+	std::map<std::pair<int, int>, double> adjMatrix;
   int numberNodes;
   bool *visited;
 	

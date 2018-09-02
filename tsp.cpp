@@ -6,7 +6,7 @@ namespace TI {
 
 
 void TSP::nearestNeighbor(const int& srcId,
-	std::vector<int>& tour, int& totalCost, int& remainingNodes) {
+	std::vector<int>& tour, double& totalCost, int& remainingNodes) {
 
   if (remainingNodes == 0) {
     int cost = graph.adjMatrix.at(std::make_pair(TSP::firstNodeId, srcId));
@@ -15,7 +15,7 @@ void TSP::nearestNeighbor(const int& srcId,
 
     return;
   }
-  int minCost = std::numeric_limits<int>::max();
+  double minCost = std::numeric_limits<double>::max();
   int nodeIdMinCost = 0;
   for (int i = 1; i <= graph.numberNodes; ++i) {
     if (!graph.visited[i-1]) {
@@ -26,7 +26,7 @@ void TSP::nearestNeighbor(const int& srcId,
           continue;
       }
 
-      int cost = edgeIt->second;
+      double cost = edgeIt->second;
       if (cost < minCost) {
         minCost = cost;
         nodeIdMinCost = i;
