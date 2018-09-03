@@ -1,25 +1,10 @@
-As instâncias fornecidas se dividem em dois tipos que são aquelas onde a distância entre os pontos é euclidiana (EUC_2D) e as que a distância é pseudo euclidiana (ATT). 
-Por isso, para cada tipo de instância, o cálculo da distância entre os pontos é feito de forma diferente.
+A heuristica escolhida para ser implementada e usada foi a heuristica do vizinho mais próximo.
+Basicamente é selecionado a cidade em que o viajante começa, escolhi o 1 mesmo para simplificação e
+consistencia no resultado, mas poderia ser um nó arbitrário. 
+A partir dele, verifica qual a cidade mais próxima de onde ele se encontra, indo para ela. Esse comportamento se segue, visitando a cidade apenas uma única vez, até que se volte para a primeira cidade que se iniciou a trajetória.
 
-1- Distância Euclidiana (EUC_2D)
+Para compilar o código execute:
+	g++ -std=c++11 Main.cpp tsp.cpp Graph.cpp
 
-Sejam x[i] e y[i] as coordenadas de um ponto i. Para as arestas do tipo EUC_2D (distância euclidiana) a distância entre dois pontos i e j é computado como segue:
-
-xd= x[i]-x[j];
-yd= y[i]-y[j];
-dij= nint( sqrt( xd*xd + yd*yd));
-
-
-2- Distância Euclidiana (ATT)
-
-Sejam x[i] e y[i] as coordenadas de um ponto i. Para as arestas do tipo ATT (distância pseudo euclidiana) a distância entre dois pontos i e j é computado como segue:
-
-xd= x[i]-x[j];
-yd= y[i]-y[j];
-rij= sqrt( (xd*xd + yd*yd)/10.0 );
-tij= nint( rij );
-
-if(tij<rij)
- dij= tij+1;
-else
-   dij= tij;
+E para executar o código:
+	./a.out <Nome_do_arquivo.tsp>

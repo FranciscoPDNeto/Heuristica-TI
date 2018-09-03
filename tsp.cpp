@@ -8,6 +8,7 @@ namespace TI {
 void TSP::nearestNeighbor(const int& srcId,
 	std::vector<int>& tour, double& totalCost, int& remainingNodes) {
 
+  // Caso não tenha mais nós, volta para a cidade inicial e acaba a viagem.
   if (remainingNodes == 0) {
     double cost = graph.adjMatrix.at(std::make_pair(TSP::firstNodeId, srcId));
     totalCost += cost;
@@ -15,12 +16,16 @@ void TSP::nearestNeighbor(const int& srcId,
 
     return;
   }
+
   double minCost = std::numeric_limits<double>::max();
   int nodeIdMinCost = 0;
   for (int i = 1; i <= graph.numberNodes; ++i) {
     if (!graph.visited[i-1]) {
+      
       auto edgeIt = graph.adjMatrix.find(std::make_pair(srcId, i));
       if (edgeIt == graph.adjMatrix.end()) {
+        // Como é um grafo não direcionado, então pode estar registrado
+        // o par contrário.
         edgeIt = graph.adjMatrix.find(std::make_pair(i, srcId));
         if (edgeIt == graph.adjMatrix.end())
           continue;
@@ -33,6 +38,7 @@ void TSP::nearestNeighbor(const int& srcId,
       }
     }
   }
+  
   graph.visited[nodeIdMinCost-1] = true;
   tour.push_back(nodeIdMinCost);
   --remainingNodes;

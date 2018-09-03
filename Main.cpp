@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include "tsp.h"
@@ -32,10 +32,12 @@ int main(int argc, char *argv[]) {
   std::string key;
   std::string twoPoints;
   int nodeLength;
-  file >> key >> twoPoints >> nodeLength;
+  std::getline(file, key, ':');
+  file >> nodeLength;
   
   std::string edgeDistanceMethod;
-  file >> key >> twoPoints >> edgeDistanceMethod;
+  std::getline(file, key, ':');
+  file >> edgeDistanceMethod;
   
   // Linha contendo o identificador que as coordenadas vão começar a serem lidas.
   getline(file, ignore);
@@ -49,6 +51,7 @@ int main(int argc, char *argv[]) {
     nodes.push_back(node);
   }
 
+  
   TI::Graph graph(nodes, nodeLength, edgeDistanceMethod);
 
   std::vector<int> tour;
@@ -58,11 +61,18 @@ int main(int argc, char *argv[]) {
   double totalCost = 0.0;
   int firstNodeId = 1;
   TI::TSP tsp(graph, firstNodeId);
+
+  std::clock_t start = std::clock();
+  double duration;
   tsp.nearestNeighbor(firstNodeId, tour, totalCost, remainingNodes);
-  
+  duration = (double)(std::clock() - start) / CLOCKS_PER_SEC;
+  std::cout << duration << " second" << std::endl;
+  /*
+  Aqui mostra o caminho feito pelo viajante.
   for (int id : tour) {
     std::cout << id << std::endl;
   }
+  */
   std::cout << "Total cost: " << totalCost << std::endl;
   file.close();
   return 0;
