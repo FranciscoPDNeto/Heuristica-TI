@@ -1,7 +1,6 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
-#include <limits>
 #include "tsp.h"
 
 int main(int argc, char *argv[]) {
@@ -52,15 +51,13 @@ int main(int argc, char *argv[]) {
     cities.push_back(node.id);
     nodes.push_back(node);
   }
-
   
   TI::Graph graph(nodes, nodeLength, edgeDistanceMethod);
   std::vector<int> tour;
   tour.push_back(1);
   graph.visited[0] = true;
   int remainingNodes = nodeLength - 1;
-  //double totalCost = 0.0;
-  double totalCost = std::numeric_limits<double>::max();
+  double totalCost = 0.0;
   int firstNodeId = 1;
   TI::TSP tsp(graph, firstNodeId);
 
@@ -71,7 +68,7 @@ int main(int argc, char *argv[]) {
   duration = (double)(std::clock() - start) / CLOCKS_PER_SEC;
   std::cout << duration << " second" << std::endl;
   /*
-  Aqui mostra o caminho feito pelo viajante.
+  // Aqui mostra o caminho feito pelo viajante.
   for (int id : tour) {
     std::cout << id << std::endl;
   }
