@@ -1,6 +1,7 @@
 #include <ctime>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include "tsp.h"
 
 int main(int argc, char *argv[]) {
@@ -30,7 +31,6 @@ int main(int argc, char *argv[]) {
   }
   
   std::string key;
-  std::string twoPoints;
   int nodeLength;
   std::getline(file, key, ':');
   file >> nodeLength;
@@ -44,27 +44,30 @@ int main(int argc, char *argv[]) {
   getline(file, ignore);
 
   std::vector<TI::Node> nodes;
+  std::vector<int> cities;
   for (int i = 0; i < nodeLength; ++i) {
     TI::Node node;
     
     file >> node.id >> node.x >> node.y;
+    cities.push_back(node.id);
     nodes.push_back(node);
   }
 
   
   TI::Graph graph(nodes, nodeLength, edgeDistanceMethod);
-
   std::vector<int> tour;
   tour.push_back(1);
   graph.visited[0] = true;
   int remainingNodes = nodeLength - 1;
-  double totalCost = 0.0;
+  //double totalCost = 0.0;
+  double totalCost = std::numeric_limits<double>::max();
   int firstNodeId = 1;
   TI::TSP tsp(graph, firstNodeId);
 
   std::clock_t start = std::clock();
   double duration;
-  tsp.nearestNeighbor(firstNodeId, tour, totalCost, remainingNodes);
+  //tsp.nearestNeighbor(firstNodeId, tour, totalCost, remainingNodes);
+  tsp.variableNeighborhoodDescent(tour, totalCost, cities);
   duration = (double)(std::clock() - start) / CLOCKS_PER_SEC;
   std::cout << duration << " second" << std::endl;
   /*
