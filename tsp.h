@@ -1,5 +1,7 @@
 #include <vector>
+#include <set>
 #include "Graph.h"
+#include "Trie.h"
 
 namespace TI {
 
@@ -21,6 +23,14 @@ public:
   void nearestNeighbor(const int& srcId, std::vector<int>& tour, 
     double& totalCost, int& remainingNodes);
 
+  std::vector<std::vector<int>> getNeighborhood2OPT(std::vector<int> tour);
+
+  std::vector<std::vector<int>> getNeighborhood3OPT(std::vector<int> tour);
+
+  void twoOPT(std::vector<int>& tour);
+
+  void threeOPT(std::vector<int>& tour);
+
   /**
    * \brief Heuristica multi-vizinhança.
    * 
@@ -32,6 +42,13 @@ public:
     double& totalCost, std::vector<int> cities);
 
   int calculateTourCost(const std::vector<int>& tour);
+
+  double getBestNeighbor(std::vector<int>& tour, 
+    const std::vector<int> cities, 
+    std::set<std::vector<int>>& tabuList);
+
+  void tabuSearch(std::vector<int>& tour, double& totalCost, 
+    const std::vector<int> cities);
   
 private:
   Graph graph;

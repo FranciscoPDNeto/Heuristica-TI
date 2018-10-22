@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
   std::clock_t start = std::clock();
   double duration;
   //tsp.nearestNeighbor(firstNodeId, tour, totalCost, remainingNodes);
-  tsp.variableNeighborhoodDescent(tour, totalCost, cities);
+  tsp.tabuSearch(tour, totalCost, cities);
   duration = (double)(std::clock() - start) / CLOCKS_PER_SEC;
   std::cout << duration << " second" << std::endl;
   /*
